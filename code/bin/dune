@@ -1,0 +1,4 @@
+(executable
+ (public_name TIPE_compression)
+ (name main)
+ (libraries TIPE_compression))
