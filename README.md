@@ -14,6 +14,11 @@
 + codage arithmetique
 + ondelettes (chrominance, luminance, teinte)
 
+## TODO
++ implementer ecriture bit-a-bit sur un fichier
++ Huffman
+    + implementer arbres et tas min
+
 ## Sources
 + [video de vulgarisation sur les ondelettes](https://youtu.be/vpmlGMZSpvQ?si=35RCm1T92-lWqZgx)
 + [article wikipedia sur la compression de donnees](https://fr.wikipedia.org/wiki/Compression_de_donn%C3%A9es)
