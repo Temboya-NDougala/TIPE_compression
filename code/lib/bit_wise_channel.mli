@@ -1,3 +1,13 @@
+exception Invalid_stream
+(**
+    Typically occurs when a file that was written
+    byte-wise (ie w/ an out_channel instead of an out_stream)
+    is oppened as a bit-wise stream.*)
+
+exception End_of_stream
+(**
+    Raised when reaching the end of a bit-wise stream.*)
+
 type in_stream
 (**
     flux de donnees entrant que l'on peut manipuler bit par bit,
