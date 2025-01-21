@@ -47,11 +47,11 @@ val write_bit : out_stream -> int -> unit
     [write_bit out to_write] ecrits le bit de poids faible de [to_write] dans
     le flux bit-a-bit [out].*)
 
-val write_n_bits : out_stream -> int -> int -> unit
+val write_n_bits : int -> out_stream -> int -> unit
 (**
-    [write_n_bits out n to_write] ecrits les [n] bits de poids faible de
-    [to_write] en ordre de poids croissant.
-    eg : [write_n_bits out 4 13] ecrits "1011" dans [out] et pas "1101"*)
+    [write_n_bits n out to_write] ecrits les [n] bits de poids faible de
+    [to_write] en ordre de poids decroissant.
+    eg : [write_n_bits 4 out 13] ecrits "1101" dans [out]*)
 
 val close_out_stream : out_stream -> unit
 (**
