@@ -30,3 +30,6 @@ _opam/
 
 # Vscode parameters
 .vscode/
+
+#testing texts
+*.txt
