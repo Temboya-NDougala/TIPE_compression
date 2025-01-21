@@ -1,4 +1,7 @@
 (executable
  (public_name TIPE_compression)
  (name main)
- (libraries TIPE_compression))
+ (libraries TIPE_compression)
+ ;compiles in byecode or exe.
+ ;bytecode compiling is necessary for debugging
+ (modes byte exe))
