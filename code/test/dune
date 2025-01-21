@@ -1,2 +1,5 @@
-(test
- (name test_TIPE_compression))
+(executable
+ (name test_TIPE_compression)
+ ;(modules test_TIPE_compression)
+ (libraries TIPE_compression)
+ (modes byte exe))
