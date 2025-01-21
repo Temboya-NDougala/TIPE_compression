@@ -27,6 +27,10 @@ val read_n_bits : in_stream -> int -> int
 (**
     [read_n_bits istream n] lit les [n] premiers bits de [istream]*)
 
+val close_in_stream : in_stream -> unit
+(**
+    Closes the given in_stream.*)
+
 type out_stream
 (**
     flux de donnees sortant que l'on peut manipuler bit par bit,
