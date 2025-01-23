@@ -25,6 +25,8 @@
         1. Il existe un mot dans la version compression est de longueur supérieure ou égale au mot initial
         2. S'il existe un mot strictement compressé, il en existe au moins un autre dont la version compressée est strictement plus longue que le mot initial
         3. Les itérations du compresseurs sur un mot de départ quelconque aboutissent à l'un des deux cas suivant
+            + soit on a une boucle de mots
+            + soit la longueur des mots decompressés peut devenir arbitrairement grande
 + Cependant, dans la pratique, les fichiers ne sont pas totalement aléatoires, et il existe des algorithmes spécialisés qui utilisent les informations fournies par le contexte de (dé)compression (le type de fichier à décompresser, typiquement). [3]
 
 
