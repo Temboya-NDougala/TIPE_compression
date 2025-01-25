@@ -30,3 +30,9 @@ _opam/
 
 #config VSCode
 .vscode/
+
+#general configuration
+.user_config/
+
+#md extension config
+.markdown*
