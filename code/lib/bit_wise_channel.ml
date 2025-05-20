@@ -4,8 +4,8 @@ type 'a stream =
     mutable buffer : int;
     (*initialized w/ 24 bits when reading*)
     mutable buffer_size : int; (*number of bits in the buffer*)
-(*  mutable number_of_signgificant_bits : int *)
-    (*number of bits that should be read int the penultimate byte*)
+    mutable number_of_signgificant_bits : int option
+    (*number of bits that should be read in the penultimate byte*)
   }
 
 exception Invalid_stream
@@ -19,9 +19,33 @@ exception End_of_stream
     Raised when reaching the end of a bit-wise stream.*)
 
 type in_stream = In_channel.t stream
+(**
+  Bit-wise streams for reading.
+  Insertion in the buffer is right-to-left.*)
 
-let of_in_channel _ =
-  failwith "TODO"
+let of_in_channel ichannel =
+  try
+    let res = {channel = ichannel;
+      buffer = 0;
+      buffer_size = 0;
+      number_of_signgificant_bits = None}
+    in
+    res.buffer <- input_byte ichannel; (*reading first byte*)
+    res.buffer <- (res.buffer lsl 8) lor (input_byte ichannel); (*reading second byte*)
+    try
+      res.buffer <- (res.buffer lsl 8) lor (input_byte ichannel); (*reading third byte*)
+      res.buffer_size <- 24;
+      res
+    with
+    | End_of_file -> (*if the file contains only two bytes, then the second is actually
+      the number of significant bits of the first byte.*)
+      res.buffer_size <- 16;
+      res.number_of_signgificant_bits <- Some (res.buffer mod 256);
+      res
+  with
+  | End_of_file -> raise Invalid_stream
+
+
 
 let read_bit _ =
   failwith "TODO"
@@ -41,7 +65,8 @@ let of_out_channel (ochannel : out_channel) =
   {channel = ochannel;
   buffer = 0;
   buffer_size = 0;
-  (* number_of_signgificant_bits = -1 *) (*useless when writing*)}
+  number_of_signgificant_bits = None
+  (*useless when writing*)}
 
 
 let write_bit ostream to_write =
