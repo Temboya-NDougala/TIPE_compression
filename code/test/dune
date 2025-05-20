@@ -1,5 +1,4 @@
 (executable
  (name test_TIPE_compression)
- ;(modules test_TIPE_compression)
- (libraries TIPE_compression)
- (modes byte exe))
+ (public_name test_TIPE_compression)
+ (libraries TIPE_compression))
