@@ -4,8 +4,6 @@ type 'a stream =
     mutable buffer : int;
     (*initialized w/ 24 bits when reading*)
     mutable buffer_size : int; (*number of bits in the buffer*)
-    mutable number_of_signgificant_bits : int option
-    (*number of bits that should be read in the penultimate byte*)
   }
 
 exception Invalid_stream
@@ -23,38 +21,53 @@ type in_stream = In_channel.t stream
   Bit-wise streams for reading.
   Insertion in the buffer is right-to-left.*)
 
+let incr_buffer_read s =
+  (*precondition : s.buffer_size = 16
+  postcondition :
+  si le bit suivant de s.channel existe,
+  alors s.buffer_size = 24, et les 8 bits de poids le plus faible du buffer
+  sont l'octet suivant du canal
+  sinon, (on a atteint un end of file)
+  s.buffer_size est le nombre de bits signifiant de l'avant dernier octet du flux
+  et le s.buffer est l'avant dernier octect de ce flux*)
+  try
+    s.buffer <- (s.buffer lsl 8) lor (input_byte s.channel);
+    s.buffer_size <- 24;
+  with
+    |End_of_file ->
+      s.buffer_size <- s.buffer mod 256;
+      s.buffer <- s.buffer lsr 8
+
 let of_in_channel ichannel =
   try
     let res = {channel = ichannel;
       buffer = 0;
-      buffer_size = 0;
-      number_of_signgificant_bits = None}
+      buffer_size = 16;
+      }
     in
     res.buffer <- input_byte ichannel; (*reading first byte*)
     res.buffer <- (res.buffer lsl 8) lor (input_byte ichannel); (*reading second byte*)
-    try
-      res.buffer <- (res.buffer lsl 8) lor (input_byte ichannel); (*reading third byte*)
-      res.buffer_size <- 24;
-      res
-    with
-    | End_of_file -> (*if the file contains only two bytes, then the second is actually
-      the number of significant bits of the first byte.*)
-      res.buffer_size <- 16;
-      res.number_of_signgificant_bits <- Some (res.buffer mod 256);
-      res
+    incr_buffer_read res;
+    res
   with
   | End_of_file -> raise Invalid_stream
 
+let read_bit s =
+  if s.buffer_size = 0 then raise End_of_stream;
+  let res = (s.buffer lsr (s.buffer_size - 1)) mod 2 in
+  s.buffer_size <- s.buffer_size - 1;
+  if s.buffer_size = 16 then incr_buffer_read s;
+  res
 
+let read_n_bits istream n =
+  let rec aux n =
+    if n <= 0 then 0
+    else (*n > 0*) ((read_bit istream) lsl (n - 1)) lor (aux (n - 1))
+  in
+  aux n
 
-let read_bit _ =
-  failwith "TODO"
-
-let read_n_bits _ _ =
-  failwith "TODO"
-
-let close_in_stream _ =
-  failwith "TODO"
+let close_in_stream istream =
+  close_in istream.channel
 
 type out_stream = Out_channel.t stream
 (**
@@ -65,7 +78,7 @@ let of_out_channel (ochannel : out_channel) =
   {channel = ochannel;
   buffer = 0;
   buffer_size = 0;
-  number_of_signgificant_bits = None
+  (* number_of_signgificant_bits = None *)
   (*useless when writing*)}
 
 
@@ -79,6 +92,7 @@ let write_bit ostream to_write =
   if ostream.buffer_size = 8 then
     begin
       output_byte ostream.channel (ostream.buffer mod 256);
+      ostream.buffer <- 0;
       ostream.buffer_size <- 0
     end
 
