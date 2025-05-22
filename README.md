@@ -16,9 +16,13 @@
 
 ## TODO
 
-+ [ ] implementer ecriture bit-a-bit sur un fichier
++ [x] implementer ecriture bit-a-bit sur un fichier
 + [ ] Huffman
   + [ ] implementer arbres et tas min
+
+## Journal de bord
+
++ 22/05/2025 : implementation des flux bit-a-bit terminée et testée
 
 ## Notes pour la bibliographie commentée
 
