@@ -77,9 +77,7 @@ type out_stream = Out_channel.t stream
 let of_out_channel (ochannel : out_channel) =
   {channel = ochannel;
   buffer = 0;
-  buffer_size = 0;
-  (* number_of_signgificant_bits = None *)
-  (*useless when writing*)}
+  buffer_size = 0;}
 
 
 let write_bit ostream to_write =
