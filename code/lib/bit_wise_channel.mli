@@ -23,10 +23,9 @@ val read_bit : in_stream -> int
 (**
     [read_bit istream] lit le premier bit de [istream].*)
 
-val read_n_bits : in_stream -> int -> int
+val read_n_bits : in_stream -> int -> string
 (**
     [read_n_bits istream n] lit les [n] premiers bits de [istream].
-    Par exemple : si le flux vaut "1101..." alors [read_n_bits istream n] = [0 ... 01101]
     Leve End_of_stream s'il reste strictement moins de [n] bits dans le flux*)
 
 val close_in_stream : in_stream -> unit

@@ -61,8 +61,10 @@ let read_bit s =
 
 let read_n_bits istream n =
   let rec aux n =
-    if n <= 0 then 0
-    else (*n > 0*) ((read_bit istream) lsl (n - 1)) lor (aux (n - 1))
+    if n <= 0 then ""
+    else (*n > 0*)
+      let first = Int.to_string (read_bit istream) in
+      first ^ (aux (n - 1))
   in
   aux n
 
@@ -95,7 +97,7 @@ let write_bit ostream to_write =
     end
 
 let write_n_bits n out to_write =
-  let rec aux n=
+  let rec aux n =
     if n > 0 then
       begin
         write_bit out (to_write lsr (n - 1));
