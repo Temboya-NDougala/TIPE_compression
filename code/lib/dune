@@ -1,2 +1,3 @@
 (library
- (name TIPE_compression))
+ (name TIPE_compression)
+ (libraries bit_wise_channel huffman))

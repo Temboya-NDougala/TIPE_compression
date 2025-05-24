@@ -1,0 +1,4 @@
+(executable
+ (name bit_wise_channel_test)
+ (public_name bit_wise_channel_test)
+ (libraries TIPE_compression))

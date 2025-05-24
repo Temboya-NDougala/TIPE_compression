@@ -1,4 +1,4 @@
-open TIPE_compression
+(* open TIPE_compression *)
 
 let () =
   let output_test = open_out "output_test.txt" in

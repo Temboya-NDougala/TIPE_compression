@@ -1,4 +1,4 @@
-open TIPE_compression
+(* open TIPE_compression *)
 
 let bitwise_writing_test() =
   let output_test = open_out "output_test.txt" in
@@ -34,7 +34,6 @@ let bitwise_reading_test() =
   done; *)
   (* print_string (Bit_wise_channel.read_n_bits reading2 9); *)
   assert (Bit_wise_channel.read_n_bits reading2 9 = "100000000");
-  (* print_char '\n'; *)
 ;;
 
 bitwise_writing_test();

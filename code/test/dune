@@ -1,4 +1,0 @@
-(executable
- (name test_TIPE_compression)
- (public_name test_TIPE_compression)
- (libraries TIPE_compression))
