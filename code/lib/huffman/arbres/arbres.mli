@@ -18,6 +18,8 @@ val fusion : t -> t -> t
 (**
     [fusionne ag ad] renvoie une noeud de la forme [(occ(ag) + occ(ad), ag, ad)]*)
 
+val print_tree : t -> unit
+
 val arbre_encodage : In_channel.t -> t
 (**
     [arbre_encodage channel] renvoie l'arbre d'encodage correspondant au canal de lecture [channel].

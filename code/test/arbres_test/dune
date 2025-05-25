@@ -1,0 +1,4 @@
+(executable
+ (name arbres_test)
+ (public_name arbres_test)
+ (libraries TIPE_compression))

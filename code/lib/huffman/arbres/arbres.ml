@@ -11,6 +11,22 @@ let fusion a1 a2 =
   let occ_total = (occ a1) + (occ a2) in
   Noeud(occ_total, a1, a2)
 
+let rec print_tree a = match a with
+| Feuille(c, occ) ->
+  print_string "{";
+  print_char c;
+  print_string ", ";
+  print_int occ;
+  print_string "}"
+| Noeud(occ, ag, ad) ->
+  print_string "(";
+  print_int occ;
+  print_string ", ";
+  print_tree ag;
+  print_string ", ";
+  print_tree ad;
+  print_string ")"
+
 let arbre_encodage channel =
   let tab_occurences channel =
     let res = Array.make 256 0 in
@@ -42,3 +58,7 @@ let arbre_encodage channel =
       arbre_final tas
   in
   arbre_final (inserer_dans_tas (tab_occurences channel))
+
+let ecrire_arbre _ _ = ()
+
+let lire_arbre _ = feuille '0' 0
