@@ -10,4 +10,12 @@ let print_tree_test () =
   print_char '\n'
 ;;
 
-print_tree_test ()
+let arbre_encodage_test () =
+  let channel = open_in "arbre_encodage_test.txt" in
+  Arbres.print_tree (Arbres.arbre_encodage channel)
+;;
+
+print_tree_test ();
+print_string "------------------------------------------------------\n";
+arbre_encodage_test ();
+print_char '\n'

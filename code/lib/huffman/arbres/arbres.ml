@@ -13,9 +13,9 @@ let fusion a1 a2 =
 
 let rec print_tree a = match a with
 | Feuille(c, occ) ->
-  print_string "{";
+  print_string "{'";
   print_char c;
-  print_string ", ";
+  print_string "', ";
   print_int occ;
   print_string "}"
 | Noeud(occ, ag, ad) ->
