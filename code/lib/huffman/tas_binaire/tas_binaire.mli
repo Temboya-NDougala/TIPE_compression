@@ -2,6 +2,10 @@ type 'a t
 (**
     tas bianire min mutable, capacite maximale 2048*)
 
+exception Empty_heap
+(**
+    Levee quand on execute [retirer t] lorsque [t] est vide.*)
+
 val creer : 'a -> 'a t
 (**
     [creer default] cree un tas binaire vide dont le tableau de contenu contient uniquement

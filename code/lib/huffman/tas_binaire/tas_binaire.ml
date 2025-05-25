@@ -2,6 +2,8 @@ type 'a t = {
   mutable taille : int;
   tab : ('a * int) array}
 
+exception Empty_heap
+
 let creer default =
   { taille = 0;
   tab = Array.make 2048 (default, 0)
@@ -37,9 +39,12 @@ let inserer t x p =
       end
   in
   t.tab.(t.taille) <- (x, p);
-  remonter t.taille
+  remonter t.taille;
+  t.taille <- t.taille + 1
 
 let retirer t =
+  if t.taille <= 0 then raise Empty_heap;
+  
   let prio = priorite t in
   let swap = exchange t in
   let enfant_min  i =
@@ -61,4 +66,5 @@ let retirer t =
   swap 0 (t.taille - 1);
   descendre 0;
   t.taille <- t.taille - 1;
-  t.tab.(t.taille)
+  let x, _ = t.tab.(t.taille) in
+  x
