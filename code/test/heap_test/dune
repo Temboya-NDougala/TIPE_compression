@@ -1,0 +1,4 @@
+(executable
+ (name heap_test)
+ (public_name heap_test)
+ (libraries TIPE_compression))
