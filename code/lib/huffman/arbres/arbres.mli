@@ -14,7 +14,7 @@ val feuille : char -> int -> t
     [feuille c occ] renvoie une feuille etiquetee par le caractere [c] et l'entier [occ], qui est
     cense etre le nombre d'occurences de [c] dans le text a compresser.*)
 
-val fusionne : t -> t -> t
+val fusion : t -> t -> t
 (**
     [fusionne ag ad] renvoie une noeud de la forme [(occ(ag) + occ(ad), ag, ad)]*)
 
