@@ -1,3 +1,3 @@
 (library
  (name arbres)
- (libraries bit_wise_channel))
+ (libraries bit_wise_channel tas_binaire))

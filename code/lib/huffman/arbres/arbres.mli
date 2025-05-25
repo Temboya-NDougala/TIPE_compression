@@ -16,7 +16,7 @@ val feuille : char -> int -> t
 
 val fusionne : t -> t -> t
 (**
-    [fusionne a1 a2] renvoie une noeud de la forme [(a1, occ(a1) + occ(a2), a2)]*)
+    [fusionne ag ad] renvoie une noeud de la forme [(occ(ag) + occ(ad), ag, ad)]*)
 
 val arbre_encodage : In_channel.t -> t
 (**
