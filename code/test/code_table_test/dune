@@ -1,0 +1,4 @@
+(executable
+ (name code_table_test)
+ (public_name code_table_test)
+ (libraries TIPE_compression))
