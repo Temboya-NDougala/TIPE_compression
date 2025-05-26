@@ -35,7 +35,7 @@ let incr_buffer_read s =
     s.buffer_size <- 24;
   with
     |End_of_file ->
-      s.buffer_size <- s.buffer mod 256;
+      s.buffer_size <- s.buffer land 0xff;
       s.buffer <- s.buffer lsr 8
 
 let of_in_channel ichannel =
@@ -80,7 +80,6 @@ let of_out_channel (ochannel : out_channel) =
   {channel = ochannel;
   buffer = 0;
   buffer_size = 0;}
-
 
 let write_bit ostream to_write =
   (*the buffer is considered of size 8.
