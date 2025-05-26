@@ -17,4 +17,12 @@ let of_tree a =
   lire_arbre 0 0 a;
   res
 
-let encode _ _ _ = ()
+let encode tab in_c out_s =
+  let rec aux () = match In_channel.input_char in_c with
+  | None -> ()
+  | Some c ->
+    let code, length = get tab c in
+    Bit_wise_channel.write_n_bits length out_s code;
+    aux ()
+  in
+  aux ()
