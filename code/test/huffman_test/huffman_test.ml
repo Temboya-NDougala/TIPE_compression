@@ -11,3 +11,4 @@ let test_huffman preffix =
 
 test_huffman "source";;
 test_huffman "bee_movie";;
+test_huffman "bible";;
