@@ -1,0 +1,4 @@
+(executable
+ (name encodage_decodage_test)
+ (public_name encodage_decodage_test)
+ (libraries TIPE_compression))

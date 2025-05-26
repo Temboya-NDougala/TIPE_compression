@@ -79,8 +79,8 @@ let rec lire_arbre channel = match In_channel.input_char channel with
   fusion ag ad
 |_ -> raise (Invalid_argument("echec de lecture de l'arbre"))
 
-let decoder out_s in_s a =
-  let write_char c = Bit_wise_channel.write_n_bits 8 out_s (Char.code c) in
+let decoder out_c in_s a =
+  let write_char = Out_channel.output_char out_c in
   let rec decoder_prefixe a = match a with
   | Feuille(c, _) -> write_char c
   | Noeud(_, ag, ad) ->

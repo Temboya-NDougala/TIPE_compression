@@ -35,7 +35,7 @@ val lire_arbre : In_channel.t -> t
     [lire_arbre channel] lit l'arbre en prefixe de [channel].
     Ne ferme PAS le canal*)
 
-val decoder : Bit_wise_channel.out_stream -> Bit_wise_channel.in_stream -> t -> unit
+val decoder : Out_channel.t -> Bit_wise_channel.in_stream -> t -> unit
 (**
-    [decoder out_s in_s a] ecrit dans [out_s] la version decompressee de [in_s] en utilisant
+    [decoder out_c in_s a] ecrit dans [out_c] la version decompressee de [in_s] en utilisant
     l'arbre d'encodage [a]*)
