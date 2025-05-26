@@ -36,5 +36,18 @@ let bitwise_reading_test() =
   assert (Bit_wise_channel.read_n_bits reading2 9 = "100000000");
 ;;
 
+let bitwise_reading_test2 () =
+  let reading_test3 = Bit_wise_channel.of_in_channel (open_in "reading_test3.txt") in
+  for i = 0 to 600 do
+    try
+      print_int (Bit_wise_channel.read_bit reading_test3);
+      Printf.printf " : i = %d\n" i
+    with
+    | Bit_wise_channel.End_of_stream -> ()
+  done;
+  print_char '\n'
+;;
+
 bitwise_writing_test();
 bitwise_reading_test();
+bitwise_reading_test2();
