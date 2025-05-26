@@ -78,3 +78,22 @@ let rec lire_arbre channel = match In_channel.input_char channel with
   let ad = lire_arbre channel in
   fusion ag ad
 |_ -> raise (Invalid_argument("echec de lecture de l'arbre"))
+
+let decoder out_s in_s a =
+  let write_char c = Bit_wise_channel.write_n_bits 8 out_s (Char.code c) in
+  let rec decoder_prefixe a = match a with
+  | Feuille(c, _) -> write_char c
+  | Noeud(_, ag, ad) ->
+    match Bit_wise_channel.read_bit in_s with
+    | 0 -> decoder_prefixe ag
+    | 1 -> decoder_prefixe ad
+    | _ -> raise (Invalid_argument "decoding failed : error in bit reading")
+  in
+  let rec aux () =
+    try
+      decoder_prefixe a;
+      aux ()
+    with
+    | Bit_wise_channel.End_of_stream -> ()
+  in
+  aux ()
