@@ -1,0 +1,4 @@
+(executable
+ (name huffman_test)
+ (public_name huffman_test)
+ (libraries TIPE_compression))
