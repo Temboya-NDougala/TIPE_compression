@@ -11,7 +11,7 @@ let zip filename =
 ;;
 let unzip filename =
   let suffix = String.sub filename ((String.length filename) - 4) 4 in
-  if suffix != ".hff" then raise (Invalid_argument "can only unzip .hff files")
+  if suffix <> ".hff" then raise (Invalid_argument "can only unzip .hff files")
   else
     let preffix = String.sub filename 0 ((String.length filename) - 4) in
     let in_c = open_in filename in
