@@ -1,0 +1,3 @@
+(library
+ (name code_table)
+ (libraries bit_wise_channel arbres))

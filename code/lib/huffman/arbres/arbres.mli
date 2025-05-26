@@ -1,4 +1,4 @@
-type t
+type t = Feuille of char * int | Noeud of int * t * t
 (**
     arbres de characteres. Les feuilles sont etiquetees par des caracteres, et chaque noeud N
     est etiquete par le nombre total d'occurences de tous les caracteres aux feuilles du sous-arbre
