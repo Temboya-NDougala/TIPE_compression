@@ -6,4 +6,5 @@ val zip : string -> unit
 val unzip : string -> unit
 (**
     [unzip filename] creates an unzipped version of [filename].
-    Raises an excpetion if the file wasn't zipped using [zip filename].*)
+    Raises an exception if the file wasn't zipped using [zip filename].
+    [filename] must have [".hff"] as a suffix, raises an exception if not.*)
