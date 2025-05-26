@@ -7,9 +7,9 @@ let occ a =
 
 let feuille c occ = Feuille(c, occ)
 
-let fusion a1 a2 =
-  let occ_total = (occ a1) + (occ a2) in
-  Noeud(occ_total, a1, a2)
+let fusion ag ad =
+  let occ_total = (occ ag) + (occ ad) in
+  Noeud(occ_total, ag, ad)
 
 let rec print_tree a = match a with
 | Feuille(c, occ) ->
@@ -59,6 +59,22 @@ let arbre_encodage channel =
   in
   arbre_final (inserer_dans_tas (tab_occurences channel))
 
-let ecrire_arbre _ _ = ()
+let ecrire_arbre channel a =
+  let rec aux a = match a with
+  | Feuille(c, _) ->
+    output_char channel '"';
+    output_char channel c;
+  | Noeud(_, ag, ad) ->
+    output_char channel '+';
+    aux ag;
+    aux ad
+  in
+  aux a
 
-let lire_arbre _ = feuille '0' 0
+let rec lire_arbre channel = match In_channel.input_char channel with
+| Some('"') -> feuille (input_char channel) 0
+| Some('+') ->
+  let ag = lire_arbre channel in
+  let ad = lire_arbre channel in
+  fusion ag ad
+|_ -> raise (Invalid_argument("echec de lecture de l'arbre"))
