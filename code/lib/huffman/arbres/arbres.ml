@@ -37,7 +37,7 @@ let arbre_encodage channel =
       count_occ channel
     in
     count_occ channel;
-    In_channel.close channel;
+    close_in channel;
     res
   in
   let inserer_dans_tas tab_occ =
@@ -90,10 +90,13 @@ let decoder out_c in_s a =
     | _ -> raise (Invalid_argument "decoding failed : error in bit reading")
   in
   let rec aux () =
-    try
-      decoder_prefixe a;
-      aux ()
-    with
-    | Bit_wise_channel.End_of_stream -> ()
+    let prefixe =
+      try
+        decoder_prefixe a;
+        true
+      with
+      | Bit_wise_channel.End_of_stream -> false
+    in
+    if prefixe then aux()
   in
-  aux ()
+  aux()
