@@ -4,6 +4,8 @@ type t
     [code] est le code de Huffman de [c] ecrit sur un eniter et [length]
     la longueur de [code].*)
 
+val print : t -> unit
+
 val of_tree : Arbres.t -> t
 (**
     [of_tree a] renvoie la table de codage correspondant a l'arbre de
