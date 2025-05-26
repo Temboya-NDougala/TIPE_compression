@@ -8,7 +8,10 @@ let a2 =
       (Arbres.feuille 'c' 0)
       (Arbres.fusion
         (Arbres.feuille ' ' 0)
-        (Arbres.feuille '!' 0)
+        (Arbres.fusion
+          (Arbres.feuille '!' 0)
+          (Arbres.feuille '\n' 0)
+        )
       )
     )
 ;;
