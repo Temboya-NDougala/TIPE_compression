@@ -39,4 +39,4 @@ _opam/
 
 #testing texts
 *.txt
-
+*.hff
