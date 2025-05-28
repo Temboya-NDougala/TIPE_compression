@@ -54,7 +54,7 @@ let of_in_channel ichannel =
 
 let read_bit s =
   if s.buffer_size = 0 then raise End_of_stream;
-  let res = (s.buffer lsr (s.buffer_size - 1)) mod 2 in
+  let res = (s.buffer lsr (s.buffer_size - 1)) land 0x1 in
   s.buffer_size <- s.buffer_size - 1;
   if s.buffer_size = 16 then incr_buffer_read s;
   res
@@ -86,11 +86,11 @@ let write_bit ostream to_write =
   If the buffer is full, then write its content down and empty
   the buffer.
   Then, in any case, insert the bit to write in the buffer.*)
-  ostream.buffer <- (ostream.buffer lsl 1) lor (to_write mod 2);
+  ostream.buffer <- (ostream.buffer lsl 1) lor (to_write land 0x1);
   ostream.buffer_size <- ostream.buffer_size + 1;
   if ostream.buffer_size = 8 then
     begin
-      output_byte ostream.channel (ostream.buffer mod 256);
+      output_byte ostream.channel (ostream.buffer land 0xff);
       ostream.buffer <- 0;
       ostream.buffer_size <- 0
     end

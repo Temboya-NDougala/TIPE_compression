@@ -37,8 +37,14 @@ let bitwise_reading_test() =
 ;;
 
 let bitwise_reading_test2 () =
+  print_string "bitwise_reading_test2\n-----------------------------------------------\n";
+  let reading_test3_writing = Bit_wise_channel.of_out_channel (open_out "reading_test3.txt") in
+  for _ = 1 to 100 do
+    Bit_wise_channel.write_n_bits 8 reading_test3_writing 0x7e; (*0111 1110 en binaire*)
+  done;
+  Bit_wise_channel.close_out_stream reading_test3_writing;
   let reading_test3 = Bit_wise_channel.of_in_channel (open_in "reading_test3.txt") in
-  for i = 0 to 600 do
+  for i = 0 to 800 do
     try
       print_int (Bit_wise_channel.read_bit reading_test3);
       Printf.printf " : i = %d\n" i
