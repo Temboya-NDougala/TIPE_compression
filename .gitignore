@@ -38,5 +38,6 @@ _opam/
 .markdown*
 
 #testing texts
-*.txt
+code/test/**/*.txt
+code/test/**/*.pdf
 *.hff
