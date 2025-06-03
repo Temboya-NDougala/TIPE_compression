@@ -1,0 +1,4 @@
+(executable
+ (name stats_test)
+ (public_name stats_test)
+ (libraries TIPE_compression))
